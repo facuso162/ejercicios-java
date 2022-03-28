@@ -27,6 +27,9 @@ public class Administrativo extends Empleado {
 	public void setHsMes(int hsMes) {
 		this.hsMes = hsMes;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Administrativo [hsExtra=" + hsExtra + ", hsMes=" + hsMes + super.toString() + "]";
+	}
 }

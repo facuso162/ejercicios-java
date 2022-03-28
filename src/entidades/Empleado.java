@@ -48,5 +48,10 @@ public abstract class Empleado {
 	public void setSueldoBase(double sueldoBase) {
 		this.sueldoBase = sueldoBase;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Empleado [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", sueldoBase=" + sueldoBase + "]";
+	}
 }

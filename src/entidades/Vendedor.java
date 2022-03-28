@@ -27,6 +27,11 @@ public class Vendedor extends Empleado {
 	public void setTotalVentas(int totalVentas) {
 		this.totalVentas = totalVentas;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Vendedor [porcenComision=" + porcenComision + ", totalVentas=" + totalVentas + super.toString() + "]";
+	}
+
+
 }
