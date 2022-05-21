@@ -1,5 +1,7 @@
 package entidades;
 
+import java.sql.Date;
+
 public class Product {
 	private int id;
 	private String name;
@@ -7,6 +9,8 @@ public class Product {
 	private double price;
 	private int stock;
 	private boolean shippingIncluded;
+	//ejercicio 6b
+	private Date disabledOn;
 	
 	public Product() {
 		
@@ -24,13 +28,35 @@ public class Product {
 		this.shippingIncluded = shippingIncluded;
 	}
 	
-	public Product(int id, String name, String description, double price, int stock, boolean shippingIncluded) {
+	//constructor 6a
+	/*public Product(int id, String name, String description, double price, int stock, boolean shippingIncluded) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.stock = stock;
 		this.shippingIncluded = shippingIncluded;
+	}*/
+	
+	//constructor 6b
+	public Product(int id, String name, String description, double price, int stock, boolean shippingIncluded, Date disabledOn) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.stock = stock;
+		this.shippingIncluded = shippingIncluded;
+		this.disabledOn = disabledOn;
+	}
+	
+	//ejercicio 6b
+	public Date getDisabledOn() {
+		return disabledOn;
+	}
+
+	//ejercicio 6b
+	public void setDisabledOn(Date disabledOn) {
+		this.disabledOn = disabledOn;
 	}
 
 	public String getName() {
@@ -81,10 +107,11 @@ public class Product {
 		this.id = id;
 	}
 
+	//modificado para ej 6b
 	@Override
 	public String toString() {
-		return String.format("Datos del producto:\nid = %s, nombre = %s, descripcion = %s, precio = %s, stock = %s, ¿envio incluido? = %s", id,
-				name, description, price, stock, shippingIncluded);
+		return String.format("Datos del producto:\nid = %s, nombre = %s, descripcion = %s, precio = %s, stock = %s, ¿envio incluido? = %s, disabledOn = %s", id,
+				name, description, price, stock, shippingIncluded, disabledOn);
 	}
 	
 	

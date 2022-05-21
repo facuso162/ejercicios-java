@@ -1,6 +1,7 @@
 package ui;
 
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
 import data.ProductDAOJDBC;
@@ -104,6 +105,15 @@ public class Menu {
 		verificarSON(q);
 		if(q == 's') p.setShippingIncluded(true);
 		else p.setShippingIncluded(false);
+		//agg 6b static Date valueOf(String date)	returns sql date object for the given String.
+		System.out.println("Ingrese el atributo disabledOn");
+		System.out.println("Ingrese el año: ");
+		int y = s.nextInt();
+		System.out.println("Ingrese el mes: ");
+		int m = s.nextInt();
+		System.out.println("Ingrese el dia: ");
+		int d = s.nextInt();
+		p.setDisabledOn(new Date(y - 1900, m - 1, d));
 		try {
 			System.out.println(pDao.newProduct(p).getId());
 		} catch (SQLException e) {
@@ -171,6 +181,20 @@ public class Menu {
 					verificarSON(q);
 					if(q == 's') p.setShippingIncluded(true);
 					else p.setShippingIncluded(false);
+				}
+				//agg 6b
+				System.out.println("Ingrese 's' si desea modificar el atributo disabledOn, de lo contrario, ingrese 'n'");
+				q = Character.toLowerCase(s.nextLine().charAt(0));
+				verificarSON(q);
+				if(q == 's') {
+					System.out.println("Ingrese el nuevo atributo disabledOn");
+					System.out.println("Ingrese el año: ");
+					int y = s.nextInt();
+					System.out.println("Ingrese el mes: ");
+					int m = s.nextInt();
+					System.out.println("Ingrese el dia: ");
+					int d = s.nextInt();
+					p.setDisabledOn(new Date(y - 1900, m - 1, d));
 				}
 				pDao.update(p);
 			} else {

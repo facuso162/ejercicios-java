@@ -19,7 +19,8 @@ public class ProductDAOJDBC implements ProductDAO{
 			rs = stmt.executeQuery("SELECT * FROM product");
 			if(rs != null) {
 				while(rs.next()) {
-					p = new Product(rs.getInt("id"), rs.getString("product_name"), rs.getString("product_desc"), rs.getDouble("price"), rs.getInt("stock"), rs.getBoolean("shippingIncluded"));
+					//llamada a constructor 6b
+					p = new Product(rs.getInt("id"), rs.getString("product_name"), rs.getString("product_desc"), rs.getDouble("price"), rs.getInt("stock"), rs.getBoolean("shippingIncluded"), rs.getDate("disabledOn"));
 					productos.add(p);
 				}
 			}
@@ -49,6 +50,8 @@ public class ProductDAOJDBC implements ProductDAO{
 				p.setPrice(rs.getDouble("price"));
 				p.setStock(rs.getInt("stock"));
 				p.setShippingIncluded(rs.getBoolean("shippingIncluded"));
+				//ejercicio 6b
+				p.setDisabledOn(rs.getDate("disabledOn"));
 			} else p = null;
 		} catch (SQLException e) {
 			e.printStackTrace(System.out);
@@ -67,12 +70,15 @@ public class ProductDAOJDBC implements ProductDAO{
 		ResultSet keyRS = null;
 		try {
 			conn = DbConnector.getConnection();
-			pstmt = conn.prepareStatement("INSERT INTO product (product_name, product_desc, price, stock, shippingIncluded) VALUES (?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			//sentencia sql modificada para el ej 6b
+			pstmt = conn.prepareStatement("INSERT INTO product (product_name, product_desc, price, stock, shippingIncluded, disabledOn) VALUES (?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, p.getName());
 			pstmt.setString(2, p.getDescription());
 			pstmt.setDouble(3, p.getPrice());
 			pstmt.setInt(4, p.getStock());
 			pstmt.setBoolean(5, p.isShippingIncluded());
+			//ej 6b
+			pstmt.setDate(6, p.getDisabledOn());
 			pstmt.executeUpdate();			
 			keyRS = pstmt.getGeneratedKeys();
 			if( keyRS != null && keyRS.next()) {
@@ -110,13 +116,16 @@ public class ProductDAOJDBC implements ProductDAO{
 		PreparedStatement pstmt = null;
 		try {
 			conn = DbConnector.getConnection();
-			pstmt = conn.prepareStatement("UPDATE product SET product_name = ?, product_desc = ?, price = ?, stock = ?, shippingIncluded = ? WHERE id = ? ");
+			//modificado ej 6b
+			pstmt = conn.prepareStatement("UPDATE product SET product_name = ?, product_desc = ?, price = ?, stock = ?, shippingIncluded = ?, disabledOn = ? WHERE id = ? ");
 			pstmt.setString(1, p.getName());
 			pstmt.setString(2, p.getDescription());
 			pstmt.setDouble(3, p.getPrice());
 			pstmt.setInt(4, p.getStock());
 			pstmt.setBoolean(5, p.isShippingIncluded());
-			pstmt.setInt(6, p.getId());
+			//ej 6b
+			pstmt.setDate(6, p.getDisabledOn());
+			pstmt.setInt(7, p.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace(System.out);
