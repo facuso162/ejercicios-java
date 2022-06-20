@@ -90,6 +90,7 @@ public class Menu {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void newProducto() {
 		Product p = new Product();
 		System.out.println("Ingrese el nombre del producto: ");
@@ -138,6 +139,7 @@ public class Menu {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void update() {
 		System.out.println("Ingrese el id del producto a actualizar:");
 		try {

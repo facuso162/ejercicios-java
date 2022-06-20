@@ -32,5 +32,6 @@ public class Ejercicio4 {
 		} else {
 			System.out.println("Ningun numero es mayor a: " + n);
 		}
+		s.close();
 	}
 }

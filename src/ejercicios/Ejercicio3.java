@@ -31,5 +31,6 @@ public class Ejercicio3 {
 		} else {
 			System.out.println("No se pudo encontrar la palabra: " + pal + " en el arreglo");
 		}
+		s.close();
 	}
 }
